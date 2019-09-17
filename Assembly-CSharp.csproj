@@ -61,12 +61,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Helpers\GameObjectHelpers.cs" />
-    <Compile Include="Assets\Scripts\BackgroundController.cs" />
-    <Compile Include="Assets\Scripts\BackgroundShifter.cs" />
-    <Compile Include="Assets\Scripts\ObstacleController.cs" />
-    <Compile Include="Assets\Scripts\RexController.cs" />
-    <Compile Include="Assets\Scripts\VanishingTriggerController.cs" />
+    <Compile Include="Assets\Scripts\BackgroundMovement.cs" />
+    <Compile Include="Assets\Scripts\BackgroundTrigger.cs" />
+    <Compile Include="Assets\Scripts\CollidingObstacle.cs" />
+    <Compile Include="Assets\Scripts\Constants\NonplayerMovementConstants.cs" />
+    <Compile Include="Assets\Scripts\Constants\ObstaclePropertyConstants.cs" />
+    <Compile Include="Assets\Scripts\Constants\PlayerMovementConstants.cs" />
+    <Compile Include="Assets\Scripts\GUIMenu.cs" />
+    <Compile Include="Assets\Scripts\Helpers\CanvasGUIHelpers.cs" />
+    <Compile Include="Assets\Scripts\Helpers\GameObjectHelpers.cs" />
+    <Compile Include="Assets\Scripts\RexMovement.cs" />
+    <Compile Include="Assets\Scripts\SpawnTrigger.cs" />
+    <Compile Include="Assets\Scripts\StoredData\StoredGUIProperties.cs" />
+    <Compile Include="Assets\Scripts\StoredData\StoredLevelProperties.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/DaiHuy/Documents/T-Rex Runner/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

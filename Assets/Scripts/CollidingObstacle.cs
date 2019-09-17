@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleController : MonoBehaviour {
+public class CollidingObstacle : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag=="REX")
         {
-            Debug.Log("Game Over");
+            RexMovement.IsDead = true;
+            RexMovement.IsStart = false;
         }
     }
 

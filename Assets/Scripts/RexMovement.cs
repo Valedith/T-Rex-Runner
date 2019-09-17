@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.Constants;
+using System.Collections;
 using UnityEngine;
 
-public class RexController : MonoBehaviour {
-    [SerializeField] int jumpHeight = 5;
-    [SerializeField] int movingSpeed = 5;
-    
-    bool onGround = true;
-    bool isDead = false;
+public class RexMovement : MonoBehaviour {
+    float jumpPower;
+    bool onGround;
     Animator rexAnimator;
 
     private static bool isStart;
+    private static bool isDead;
     Rigidbody2D rexRigidBody2D;
 
     public static bool IsStart
@@ -26,6 +24,19 @@ public class RexController : MonoBehaviour {
         }
     }
 
+    public static bool IsDead
+    {
+        get
+        {
+            return isDead;
+        }
+
+        set
+        {
+            isDead = value;
+        }
+    }
+
     // Use this for initialization
     void Start () {
         Init();
@@ -33,9 +44,9 @@ public class RexController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(isDead)
+        if(IsDead)
         {
-            //PAUSE + LOCK INPUT
+            GameOver();
         }
         else
         {
@@ -54,6 +65,9 @@ public class RexController : MonoBehaviour {
     {
         rexRigidBody2D = GetComponent<Rigidbody2D>();
         rexAnimator = GetComponent<Animator>();
+        jumpPower = PlayerMovementConstants.PLAYER_JUMP_POWER;
+        onGround = true;
+        isDead = false;
         IsStart = false;
     }
 
@@ -61,15 +75,28 @@ public class RexController : MonoBehaviour {
     {
         if (Input.GetButtonDown("Jump") && onGround == true)
         {
+            //Add Jumping Sound
             rexAnimator.SetBool("isJumping", true);
-            rexRigidBody2D.velocity = new Vector2(rexRigidBody2D.velocity.x, jumpHeight);
+            rexRigidBody2D.velocity = new Vector2(rexRigidBody2D.velocity.x, jumpPower);
             onGround = false;
             StartCoroutine(GameStart());
         }
     }
+    void GameOver()
+    {
+        if(IsDead)
+        {
+            isStart = false;
+            rexAnimator.SetBool("isJumping", false);
+            rexAnimator.SetBool("isDead", true);
+            rexRigidBody2D.freezeRotation = true;
+            rexRigidBody2D.velocity = Vector2.zero;
+            rexRigidBody2D.gravityScale = 0;
+        }
+    }
     IEnumerator GameStart()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1.0f);
         if (IsStart == false)
         {
             IsStart = true;
